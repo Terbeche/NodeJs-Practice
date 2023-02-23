@@ -37,23 +37,45 @@ const getAllTasks = () => taskList;
 // retourne l'indice de la tache qui correpond à l'identifiant id
 const findTaskIndex = (id) => taskList.indexOf((task) => task.id === id);
 
-// A faire
 const addTask = (description, date, horaire, imageUrl, idUtilisateur) => {
-  /** ajoute une nouvelle tache à la liste des taches taskList **/
+  taskList.push({
+    id: taskList.length + 1,
+    description: description,
+    date: date,
+    horaire: horaire,
+    imageUrl: imageUrl,
+    idUtilisateur: idUtilisateur,
+    etat: true,
+  });
 };
 
-// A faire
 const findTaskById = (id) => {
-  /** retourne la tache qui correpond à l'identifiant id **/
+  for (let i = 0; i < taskList.length; i++) {
+    if (taskList[i].id === id) {
+      return taskList[i];
+    }
+  }
 };
 
-// A faire
 const deleteTaskWithId = (id) => {
-  /** supprime la tache qui correpond à l'identifiant id **/
+  for (let i = 0; i < taskList.length; i++) {
+    if (taskList[i].id === id) {
+      taskList.splice(i, 1);
+    }
+  }
 };
 
 const updateTaskWithId = (id, newTask) => {
-  /** met à jour la tache qui correpond à l'identifiant id **/
+  for (let i = 0; i < taskList.length; i++) {
+    if (taskList[i].id === id) {
+      taskList[i].description = newTask.description;
+      taskList[i].date = newTask.date;
+      taskList[i].horaire = newTask.horaire;
+      taskList[i].imageUrl = newTask.imageUrl;
+      taskList[i].idUtilisateur = newTask.idUtilisateur;
+      taskList[i].etat = newTask.etat;
+    }
+  }
 };
 
 module.exports = {
