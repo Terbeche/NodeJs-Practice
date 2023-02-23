@@ -38,44 +38,30 @@ const getAllTasks = () => taskList;
 const findTaskIndex = (id) => taskList.indexOf((task) => task.id === id);
 
 const addTask = (description, date, horaire, imageUrl, idUtilisateur) => {
-  taskList.push({
+  const newTask = {
+    description,
+    date,
+    horaire,
+    imageUrl,
+    idUtilisateur,
     id: taskList.length + 1,
-    description: description,
-    date: date,
-    horaire: horaire,
-    imageUrl: imageUrl,
-    idUtilisateur: idUtilisateur,
-    etat: true,
-  });
+    etat: false,
+  };
+  taskList.push(newTask);
 };
 
-const findTaskById = (id) => {
-  for (let i = 0; i < taskList.length; i++) {
-    if (taskList[i].id === id) {
-      return taskList[i];
-    }
-  }
-};
+const findTaskById = (id) => taskList[findTaskIndex(id)];
 
 const deleteTaskWithId = (id) => {
-  for (let i = 0; i < taskList.length; i++) {
-    if (taskList[i].id === id) {
-      taskList.splice(i, 1);
-    }
-  }
+  const index = findTaskIndex(id);
+  if (index === -1) return;
+  taskList.splice(index, 1);
+  //taskList[findTaskIndex(id)]= {} // alternativement tombstone O(1)
 };
 
 const updateTaskWithId = (id, newTask) => {
-  for (let i = 0; i < taskList.length; i++) {
-    if (taskList[i].id === id) {
-      taskList[i].description = newTask.description;
-      taskList[i].date = newTask.date;
-      taskList[i].horaire = newTask.horaire;
-      taskList[i].imageUrl = newTask.imageUrl;
-      taskList[i].idUtilisateur = newTask.idUtilisateur;
-      taskList[i].etat = newTask.etat;
-    }
-  }
+  if ((index = findTaskIndex(id)) == -1) return;
+  taskList[index] = { ...newTask, id };
 };
 
 module.exports = {
