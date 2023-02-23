@@ -35,7 +35,9 @@ let taskList = [
 const getAllTasks = () => taskList;
 
 // retourne l'indice de la tache qui correpond à l'identifiant id
-const findTaskIndex = (id) => taskList.indexOf((task) => task.id === id);
+const findTaskIndex = (id) => taskList.findIndex((task) => task.id === id);
+
+const findTaskById = (id) => taskList.find((task) => task.id === id);
 
 const addTask = (description, date, horaire, imageUrl, idUtilisateur) => {
   const newTask = {
@@ -50,8 +52,6 @@ const addTask = (description, date, horaire, imageUrl, idUtilisateur) => {
   taskList.push(newTask);
 };
 
-const findTaskById = (id) => taskList[findTaskIndex(id)];
-
 const deleteTaskWithId = (id) => {
   const index = findTaskIndex(id);
   if (index === -1) return;
@@ -60,7 +60,8 @@ const deleteTaskWithId = (id) => {
 };
 
 const updateTaskWithId = (id, newTask) => {
-  if ((index = findTaskIndex(id)) == -1) return;
+  let index = findTaskIndex(id);
+  if (index == -1) return;
   taskList[index] = { ...newTask, id };
 };
 
