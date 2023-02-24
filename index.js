@@ -35,4 +35,8 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
+app.get("/add-task", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "add.html"));
+});
+
 app.listen(80);
