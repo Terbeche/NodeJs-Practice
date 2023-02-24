@@ -1,5 +1,7 @@
 const express = require("express");
 
+const path = require("path");
+
 const taskModule = require("./model/task");
 
 const {
@@ -27,6 +29,10 @@ app.get("/tasks/delete/:id", (req, res) => {
   const id = req.params.id;
   deleteTaskWithId(parseInt(id));
   res.json({ message: `Task with id ${id} has been deleted successfully.` });
+});
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
 app.listen(80);
